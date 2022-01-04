@@ -1,0 +1,50 @@
+version: '3.3'
+
+services:
+    app:
+        image: ${APP_IMAGE}
+        volumes:
+            - ${ENV_FILE}:/var/www/html/.env:ro
+            - ${STORAGE_PATH}:/var/www/html/storage
+        networks:
+            - traefik-public
+        deploy:
+            placement:
+                constraints:
+                    - node.labels.laravel.app-data == true
+            labels:
+                - traefik.enable=true
+                - traefik.docker.network=traefik-public
+                - traefik.constraint-label=traefik-public
+                - traefik.http.routers.laravel-app-http.rule=Host(`${DOMAIN}`)
+                - traefik.http.routers.laravel-app-http.entrypoints=http
+                - traefik.http.routers.laravel-app-http.middlewares=https-redirect
+                - traefik.http.routers.laravel-app-https.rule=Host(`${DOMAIN}`)
+                - traefik.http.routers.laravel-app-https.entrypoints=https
+                - traefik.http.routers.laravel-app-https.tls=true
+                - traefik.http.routers.laravel-app-https.tls.certresolver=le
+                - traefik.http.services.laravel-app.loadbalancer.server.port=9000
+
+    queue_worker:
+        image: ${QUEUE_WORKER_IMAGE}
+        volumes:
+            - ${ENV_FILE}:/var/www/html/.env:ro
+            - ${STORAGE_PATH}:/var/www/html/storage
+        deploy:
+            placement:
+                constraints:
+                    - node.labels.laravel.queue-worker-data == true
+
+    schedule_runner:
+        image: ${SCHEDULE_RUNNER_IMAGE}
+        volumes:
+            - ${ENV_FILE}:/var/www/html/.env:ro
+            - ${STORAGE_PATH}:/var/www/html/storage
+        deploy:
+            placement:
+                constraints:
+                    - node.labels.laravel.schedule-runner-data == true
+
+networks:
+    traefik-public:
+        external: true
