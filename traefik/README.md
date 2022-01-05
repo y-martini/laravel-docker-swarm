@@ -15,13 +15,10 @@ vim .env
 ```
 
 ```shell
-source .env
+export HASHED_PASSWORD=$(openssl passwd -apr1)
 ```
 
 ```shell
-export HASHED_PASSWORD=$(openssl passwd -apr1 $PASSWORD)
-```
-
-```shell
+env $(cat .env | grep ^[A-Z] | xargs) \
 docker stack deploy -c traefik.yml traefik
 ```

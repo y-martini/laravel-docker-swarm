@@ -5,6 +5,7 @@ services:
         image: ${APP_IMAGE}
         volumes:
             - ${ENV_FILE}:/var/www/html/.env:ro
+            - ${HTACCESS_FILE}:/var/www/html/public/.htaccess:ro
             - ${STORAGE_PATH}:/var/www/html/storage
         networks:
             - traefik-public

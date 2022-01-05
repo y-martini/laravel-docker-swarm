@@ -19,9 +19,10 @@ vim .env
 ```
 
 ```shell
-source .env
+cp data/public/example.htaccess data/public/.htaccess
 ```
 
 ```shell
+env $(cat .env | grep ^[A-Z] | xargs) \
 docker stack deploy -c laravel.yml laravel
 ```

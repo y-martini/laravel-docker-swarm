@@ -1,9 +1,13 @@
 ```shell
-git clone yuriy-martini/laravel-docker-swarm
+git clone https://github.com/yuriy-martini/laravel-docker-swarm
 ```
 
 ```shell
 docker swarm init
+```
+
+```shell
+docker swarm init --advertise-addr x.x.x.x
 ```
 
 ```shell
