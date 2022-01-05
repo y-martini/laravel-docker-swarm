@@ -24,7 +24,7 @@ services:
                 - traefik.http.routers.laravel-app-https.entrypoints=https
                 - traefik.http.routers.laravel-app-https.tls=true
                 - traefik.http.routers.laravel-app-https.tls.certresolver=le
-                - traefik.http.services.laravel-app.loadbalancer.server.port=9000
+                - traefik.http.services.laravel-app.loadbalancer.server.port=80
 
     queue_worker:
         image: ${QUEUE_WORKER_IMAGE}
