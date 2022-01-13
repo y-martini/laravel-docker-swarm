@@ -1,4 +1,8 @@
 ```shell
+docker node update --label-add laravel.webserver-data=true $NODE_ID
+```
+
+```shell
 docker node update --label-add laravel.app-data=true $NODE_ID
 ```
 
@@ -19,7 +23,7 @@ vim .env
 ```
 
 ```shell
-cp data/public/example.htaccess data/public/.htaccess
+cp webserver/conf.d/example.conf webserver/conf.d/default.conf
 ```
 
 ```shell
