@@ -45,6 +45,7 @@ services:
         image: ${APP_IMAGE}
         volumes:
             - ${ENV_FILE}:/var/www/.env:ro
+            - ${PHP_INI_FILE}:/usr/local/etc/php/php.ini:ro
             - ${STORAGE_PATH}:/var/www/storage
         networks:
             - app
@@ -57,6 +58,7 @@ services:
         image: ${QUEUE_WORKER_IMAGE}
         volumes:
             - ${ENV_FILE}:/var/www/.env:ro
+            - ${PHP_INI_FILE}:/usr/local/etc/php/php.ini:ro
             - ${STORAGE_PATH}:/var/www/storage
         deploy:
             placement:
@@ -67,6 +69,7 @@ services:
         image: ${SCHEDULE_RUNNER_IMAGE}
         volumes:
             - ${ENV_FILE}:/var/www/.env:ro
+            - ${PHP_INI_FILE}:/usr/local/etc/php/php.ini:ro
             - ${STORAGE_PATH}:/var/www/storage
         deploy:
             placement:

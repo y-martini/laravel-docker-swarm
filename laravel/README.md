@@ -23,6 +23,10 @@ vim .env
 ```
 
 ```shell
+cp app/example-php.ini app/php.ini
+```
+
+```shell
 cp webserver/conf.d/example.conf webserver/conf.d/default.conf
 ```
 
