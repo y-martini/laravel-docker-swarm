@@ -22,6 +22,8 @@ services:
 
     pma:
         image: phpmyadmin
+        environment:
+            PMA_HOST: mysql
         deploy:
             labels:
                 - traefik.enable=true
