@@ -49,6 +49,7 @@ services:
             - ${STORAGE_PATH}:/var/www/storage
         networks:
             - app
+            - db-public
         deploy:
             placement:
                 constraints:
@@ -60,6 +61,8 @@ services:
             - ${ENV_FILE}:/var/www/.env:ro
             - ${PHP_INI_FILE}:/usr/local/etc/php/php.ini:ro
             - ${STORAGE_PATH}:/var/www/storage
+        networks:
+            - db-public
         deploy:
             placement:
                 constraints:
@@ -71,6 +74,8 @@ services:
             - ${ENV_FILE}:/var/www/.env:ro
             - ${PHP_INI_FILE}:/usr/local/etc/php/php.ini:ro
             - ${STORAGE_PATH}:/var/www/storage
+        networks:
+            - db-public
         deploy:
             placement:
                 constraints:
@@ -80,4 +85,6 @@ networks:
     app:
         driver: overlay
     traefik-public:
+        external: true
+    db-public:
         external: true

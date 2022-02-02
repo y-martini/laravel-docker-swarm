@@ -5,7 +5,6 @@ services:
     mysql:
         image: mysql:8
         command: --default-authentication-plugin=mysql_native_password
-        restart: unless-stopped
         environment:
             MYSQL_DATABASE: $DB_NAME
             MYSQL_USER: $DB_USER
@@ -18,7 +17,7 @@ services:
         volumes:
             - ./mysql/data:/var/lib/mysql
         networks:
-            - db
+            - db-public
 
     pma:
         image: phpmyadmin
@@ -43,10 +42,10 @@ services:
                 - traefik.http.routers.db-pma-https.tls.certresolver=le
 
         networks:
-            - db
             - traefik-public
 
 networks:
     traefik-public:
         external: true
-    db:
+    db-public:
+        external: true

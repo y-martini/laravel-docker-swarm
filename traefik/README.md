@@ -1,8 +1,4 @@
 ```shell
-docker network create --driver=overlay traefik-public
-```
-
-```shell
 docker node update --label-add traefik-public.traefik-public-certificates=true $NODE_ID
 ```
 

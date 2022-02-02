@@ -14,6 +14,14 @@ docker swarm init --advertise-addr x.x.x.x
 export NODE_ID=$(docker info -f '{{.Swarm.NodeID}}')
 ```
 
+```shell
+docker network create --driver=overlay traefik-public
+```
+
+```shell
+docker network create --driver=overlay --attachable db-public
+```
+
 ## Stacks
 
 1. [traefik](traefik/README.md)
