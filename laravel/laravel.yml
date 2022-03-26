@@ -57,6 +57,7 @@ services:
 
     queue_worker:
         image: ${QUEUE_WORKER_IMAGE}
+        command: ${QUEUE_WORKER_COMMAND}
         volumes:
             - ${ENV_FILE}:/var/www/.env:ro
             - ${PHP_INI_FILE}:/usr/local/etc/php/php.ini:ro

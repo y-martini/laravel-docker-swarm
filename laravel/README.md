@@ -31,6 +31,6 @@ cp webserver/conf.d/example.conf webserver/conf.d/default.conf
 ```
 
 ```shell
-env $(cat .env | grep ^[A-Z] | xargs) \
+eval $(egrep "^[^#;]" .env | xargs -d'\n' -n1 | sed 's/^/export /') && \
 docker stack deploy -c laravel.yml laravel
 ```
