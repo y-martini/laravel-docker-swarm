@@ -19,7 +19,7 @@ docker network create --driver=overlay traefik-public
 ```
 
 ```shell
-docker network create --driver=overlay --attachable db-public
+docker network create --driver=overlay db-public
 ```
 
 ## Stacks
